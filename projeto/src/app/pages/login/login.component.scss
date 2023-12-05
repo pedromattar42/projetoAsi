@@ -4,22 +4,21 @@
   color: #fff;
   background-color: #07193F;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
-}
-
-.title-login {
-  font-family: 'Bebas Neue';
-  font-size: 4rem;
 }
 
 .right-column {
   width: 50%;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
 }
 
 .title-login {
   font-family: 'Bebas Neue';
-  font-size: 4rem;
+  font-size: 10rem;
 }

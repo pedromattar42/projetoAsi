@@ -8,8 +8,9 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
 import {
-  FormControl,
   FormGroup,
   FormBuilder,
   Validators,
@@ -18,6 +19,7 @@ import {
 } from '@angular/forms';
 
 import { DropdownModule } from 'primeng/dropdown';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +31,21 @@ import { DropdownModule } from 'primeng/dropdown';
     InputTextModule,
     DropdownModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PasswordModule,
+    DividerModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('slideIn', [
+      state('void', style({ transform: 'translateX(100%)', opacity: 0.2 })),
+      transition(':enter', [
+        animate('1000ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export default class LoginComponent implements OnInit {
   #builder = inject(FormBuilder);
