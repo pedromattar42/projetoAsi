@@ -22,3 +22,12 @@
   font-family: 'Bebas Neue';
   font-size: 10rem;
 }
+
+.right-column img {
+  width: 300px; /* Defina o tamanho desejado para telas grandes */
+}
+
+/* Estilos para telas pequenas */
+.small-screen img {
+  width: 200px; /* Defina o tamanho desejado para telas pequenas */
+}
