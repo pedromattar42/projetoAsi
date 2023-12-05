@@ -17,7 +17,7 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, HostBinding  } from '@angular/core';
 
 import { DropdownModule } from 'primeng/dropdown';
 import {
@@ -68,8 +68,7 @@ export default class LoginComponent implements OnInit {
   #breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
   tamanhoDaImagem = '500px';
   #cd = inject(ChangeDetectorRef);
-  countries: any[] | undefined;
-  selectedCountry: {name: string, code: string} = {name: '', code: ''};
+  idiomas: any[] | undefined;
 
   ngOnInit(): void {
     this.model = this.#getNewModel();
@@ -83,7 +82,7 @@ export default class LoginComponent implements OnInit {
       ])
       .subscribe((state: BreakpointState) => {
         if (state.breakpoints[Breakpoints.XSmall]) {
-          this.tamanhoDaImagem = '100px';
+          this.tamanhoDaImagem = '400px';
         }
         if (state.breakpoints[Breakpoints.Small]) {
           this.tamanhoDaImagem = '200px';
@@ -103,7 +102,7 @@ export default class LoginComponent implements OnInit {
   }
 
   #loadCountries() {
-    this.countries = [
+    this.idiomas = [
       { name: 'Português - Brasileiro', code: 'BR' },
       { name: 'Português - Angolano', code: 'CN' },
       { name: 'Francês', code: 'FR' },
