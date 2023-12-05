@@ -1,0 +1,29 @@
+/* header.component.css */
+.app-header {
+  background-color: #1B3753;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  font-size: 1.5rem;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.user-info,
+.logout {
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.logo-image {
+  width: 50px;
+  color: #fff;
+}
