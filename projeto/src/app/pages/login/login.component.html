@@ -13,7 +13,7 @@
 
       <div class="flex flex-column gap-1 mt-3">
         <label htmlFor="password">Senha</label>
-        <p-password  [toggleMask]="true">
+        <p-password [toggleMask]="true">
           <ng-template pTemplate="header">
             <h6>Informe uma senha</h6>
           </ng-template>
@@ -41,8 +41,9 @@
       </div>
     </div>
 
-    <div class="right-column" [ngClass]="{'small-screen': isSmallScreen}">
-      <img src="./assets/images/logo.png" alt="">
+    <div class="right-column" [@slideIn]>
+      <img [style.width]="tamanhoDaImagem" src="./assets/images/logo.png" alt="">
     </div>
+
   </div>
 </form>

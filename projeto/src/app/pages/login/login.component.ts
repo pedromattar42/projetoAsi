@@ -15,11 +15,23 @@ import {
   FormBuilder,
   Validators,
   ReactiveFormsModule,
-  FormsModule
+  FormsModule,
 } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { DropdownModule } from 'primeng/dropdown';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +45,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ReactiveFormsModule,
     FormsModule,
     PasswordModule,
-    DividerModule
+    DividerModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -42,22 +54,49 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('slideIn', [
       state('void', style({ transform: 'translateX(100%)', opacity: 0.2 })),
       transition(':enter', [
-        animate('1000ms ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-      ])
-    ])
-  ]
+        animate(
+          '1000ms ease-out',
+          style({ transform: 'translateX(0)', opacity: 1 })
+        ),
+      ]),
+    ]),
+  ],
 })
 export default class LoginComponent implements OnInit {
   #builder = inject(FormBuilder);
   model: FormGroup = new FormGroup({});
- // #breakpointObserver: BreakpointObserver = inject(BreakpointObserver)
-    isSmallScreen = false;
+  #breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
+  tamanhoDaImagem = '500px';
+  #cd = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
     this.model = this.#getNewModel();
-    //  this.#breakpointObserver.observe(['(max-width: 767px)']).subscribe((result: any) => {
-    //   this.isSmallScreen = result.matches;
-    // });
+    this.#breakpointObserver
+      .observe([
+        Breakpoints.XSmall,
+        Breakpoints.Small,
+        Breakpoints.Medium,
+        Breakpoints.Large,
+        Breakpoints.XLarge,
+      ])
+      .subscribe((state: BreakpointState) => {
+        if (state.breakpoints[Breakpoints.XSmall]) {
+          this.tamanhoDaImagem = '100px';
+        }
+        if (state.breakpoints[Breakpoints.Small]) {
+          this.tamanhoDaImagem = '200px';
+        }
+        if (state.breakpoints[Breakpoints.Medium]) {
+          this.tamanhoDaImagem = '300px';
+        }
+        if (state.breakpoints[Breakpoints.Large]) {
+          this.tamanhoDaImagem = '400px';
+        }
+        if (state.breakpoints[Breakpoints.XLarge]) {
+          this.tamanhoDaImagem = '500px';
+        }
+        this.#cd.markForCheck()
+      });
   }
 
   #getNewModel() {
