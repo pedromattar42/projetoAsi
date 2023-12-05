@@ -20,7 +20,6 @@ import {
 
 import { DropdownModule } from 'primeng/dropdown';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { BreakpointObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-login',
@@ -51,14 +50,14 @@ import { BreakpointObserver } from '@angular/flex-layout';
 export default class LoginComponent implements OnInit {
   #builder = inject(FormBuilder);
   model: FormGroup = new FormGroup({});
-  #breakpointObserver: BreakpointObserver = inject(BreakpointObserver)
-  isSmallScreen = false;
+ // #breakpointObserver: BreakpointObserver = inject(BreakpointObserver)
+    isSmallScreen = false;
 
   ngOnInit(): void {
     this.model = this.#getNewModel();
-     this.#breakpointObserver.observe(['(max-width: 767px)']).subscribe((result: any) => {
-      this.isSmallScreen = result.matches;
-    });
+    //  this.#breakpointObserver.observe(['(max-width: 767px)']).subscribe((result: any) => {
+    //   this.isSmallScreen = result.matches;
+    // });
   }
 
   #getNewModel() {
