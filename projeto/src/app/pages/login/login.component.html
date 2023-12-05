@@ -1,0 +1,37 @@
+<form [formGroup]="model">
+  <div class="flex flex-row">
+    <div class="left-column">
+      <p class="title-login">LOGIN</p>
+
+      <div class="flex flex-column gap-2">
+        <label htmlFor="username">Email</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-user"></i>
+          <input formControlName="email" type="text" pInputText />
+        </span>
+      </div>
+
+      <div class="flex flex-column gap-2 mt-3">
+        <label htmlFor="password">Senha</label>
+        <span class="p-input-icon-left">
+          <i class="pi pi-lock"></i>
+          <input formControlName="senha" type="text" pInputText />
+        </span>
+      </div>
+
+      <div class="flex flex-column gap-2 mt-3">
+        <label htmlFor="selectLanguage">Selecione seu idioma</label>
+        <p-dropdown formControlName="idioma" optionLabel="name" placeholder="Selecione seu idioma"></p-dropdown>
+      </div>
+
+      <div class="mt-3">
+        <p-button icon="pi pi-check" label="Confirmar" [rounded]="true"></p-button>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <img src="../login/images/logo.jpg" width="100px" height="100px" alt="">
+      <p-image src="../login/images/terra.jpeg" alt="Image" width="250"></p-image>
+    </div>
+  </div>
+</form>
