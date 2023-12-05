@@ -33,7 +33,23 @@
 
       <div class="flex flex-column gap-1 mt-3">
         <label htmlFor="selectLanguage">Selecione seu idioma</label>
-        <p-dropdown formControlName="idioma" optionLabel="name" placeholder="Selecione seu idioma"></p-dropdown>
+        <p-dropdown formControlName="idioma" [options]="countries" [(ngModel)]="selectedCountry" optionLabel="name" [showClear]="true"
+          placeholder="Select a Country">
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="selectedCountry">
+              <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + selectedCountry.code.toLowerCase()" style="width: 18px" />
+              <div>{{ selectedCountry.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+                [class]="'flag flag-' + country.code.toLowerCase()" style="width: 18px" />
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
       </div>
 
       <div class="mt-3">

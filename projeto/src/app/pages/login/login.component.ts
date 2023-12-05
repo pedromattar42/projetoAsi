@@ -67,7 +67,9 @@ export default class LoginComponent implements OnInit {
   model: FormGroup = new FormGroup({});
   #breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
   tamanhoDaImagem = '500px';
-  #cd = inject(ChangeDetectorRef)
+  #cd = inject(ChangeDetectorRef);
+  countries: any[] | undefined;
+  selectedCountry: {name: string, code: string} = {name: '', code: ''};
 
   ngOnInit(): void {
     this.model = this.#getNewModel();
@@ -95,8 +97,21 @@ export default class LoginComponent implements OnInit {
         if (state.breakpoints[Breakpoints.XLarge]) {
           this.tamanhoDaImagem = '500px';
         }
-        this.#cd.markForCheck()
+        this.#cd.markForCheck();
       });
+    this.#loadCountries();
+  }
+
+  #loadCountries() {
+    this.countries = [
+      { name: 'Português - Brasileiro', code: 'BR' },
+      { name: 'Português - Angolano', code: 'CN' },
+      { name: 'Francês', code: 'FR' },
+      { name: 'Germany', code: 'DE' },
+      { name: 'Japônes', code: 'JP' },
+      { name: 'Espanhol', code: 'ES' },
+      { name: 'Inglês - Estados Unidos', code: 'US' },
+    ];
   }
 
   #getNewModel() {
@@ -105,5 +120,9 @@ export default class LoginComponent implements OnInit {
       senha: [undefined, [Validators.required]],
       idioma: [undefined, [Validators.required]],
     });
+  }
+
+  public submit() {
+    const dto = this.model.getRawValue();
   }
 }
