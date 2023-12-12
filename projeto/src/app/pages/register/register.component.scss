@@ -1,0 +1,39 @@
+.body {
+  height: 100vh;
+  width: 100%;
+  background-color: #07193F;
+}
+
+label {
+  color: white;
+}
+
+.title-register {
+  font-family: 'Bebas Neue';
+  font-size: 5rem;
+  color: white;
+}
+
+.register-fields {
+  padding-top: 20rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  color: white;
+}
+
+.submit {
+  color: white;
+}
+
+.password{
+  color: white;
+}
+
+i {
+  font-size: 1.5rem;
+}

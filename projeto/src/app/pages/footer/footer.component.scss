@@ -1,4 +1,44 @@
-
-.wave {
+div {
+  margin-top: 30rem;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
 }
 
+.infos {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  color: white;
+  font-family: 'Roboto';
+  font-size: 2rem;
+}
+
+.infos:nth-child(1) {
+  bottom: 0;
+  right: 0;
+}
+
+.infos:nth-child(2) {
+  bottom: 0;
+  right: 0;
+  margin-bottom: 35px;
+}
+
+.infos:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  margin-bottom: 60px;
+}
+
+.rights {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-family: 'Roboto';
+  color: white;
+  font-size: 2rem;
+}
