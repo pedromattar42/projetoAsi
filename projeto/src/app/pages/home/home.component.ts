@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/shared/components/organisms/header/header.component';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
