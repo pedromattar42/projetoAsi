@@ -4,9 +4,9 @@
   </div>
   <div class="user-actions">
     <span class="user-info">
-      <i class="pi pi-user"></i> Usuário
+      <i class="pi pi-user"></i> {{nome}}
     </span>
-    <span class="logout">
+    <span (click)="redirect()" class="logout">
       <i class="pi pi-sign-out"></i> Deslogar
     </span>
   </div>

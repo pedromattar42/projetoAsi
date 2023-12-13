@@ -5,10 +5,10 @@ import { LoginInterface } from '../interfaces/login';
 import { RegisterInterface } from '../interfaces/register';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GeneralService {
-  private apiUrl = '';
+  private apiUrl = 'http://localhost:3001';
   constructor(protected httpClient: HttpClient) { }
 
   login(data: LoginInterface): Observable<any> {
@@ -17,7 +17,7 @@ export class GeneralService {
   }
 
   cadastrar(data: RegisterInterface): Observable<any> {
-    const url = `${this.apiUrl}/cadastrar`;
+    const url = `${this.apiUrl}/register`;
     return this.httpClient.post(url, data);
   }
 }

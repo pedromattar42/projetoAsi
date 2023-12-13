@@ -3,9 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'eqp-pages',
-  template: `
-    <router-outlet></router-outlet>
-  `,
+  template: ` <router-outlet></router-outlet> `,
   standalone: true,
   imports: [RouterOutlet],
 })

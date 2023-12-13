@@ -1,7 +1,10 @@
+<p-toast class="custom-toast"></p-toast>
+<div class="progress-spinner" *ngIf="loading">
+  <p-progressSpinner></p-progressSpinner>
+</div>
 <div [formGroup]="model" class="body">
   <div class="register-fields">
     <p class="title-register">CADASTRO</p>
-
     <div class="flex flex-column gap-1 mt-2">
       <label htmlFor="username">Nome</label>
       <span class="p-input-icon-left">
@@ -15,7 +18,8 @@
         <i class="pi pi-user"></i>
         <input formControlName="email" type="text" pInputText />
       </span>
-      <div *ngIf="model.get('email')?.hasError('emailInvalido') && model.get('email')?.touched" class="p-error">
+      <div *ngIf="model.get('email')?.hasError('emailInvalido') && model.get('email')?.touched && email"
+        class="p-error">
         Email inválido
       </div>
     </div>
@@ -25,7 +29,7 @@
       </p-password>
     </div>
     <div class="flex flex-column gap-1 mt-2">
-      <label htmlFor="password">Confirma senha</label>
+      <label htmlFor="password">Confirmar senha</label>
       <p-password class="password" formControlName="confirmarSenha" [toggleMask]="true">
       </p-password>
       <div *ngIf="model.get('confirmarSenha')?.hasError('required') && confirmarSenha" class="p-error">
@@ -35,9 +39,20 @@
         As senhas não coincidem
       </div>
     </div>
-    <div class="mt-4">
-      <p-button class="submit" severity="success" [disabled]="model.invalid" icon="pi pi-check" label="Confirmar"
-        [rounded]="true"></p-button>
+    <div class="flex flex-column gap-1 mt-3">
+      <label htmlFor="selectLanguage">Selecione seu idioma</label>
+      <p-dropdown formControlName="disciplina" [options]="idiomas" optionValue="reference" optionLabel="name" [showClear]="true"
+        placeholder="Selecione um idioma">
+      </p-dropdown>
+    </div>
+    <div class="mt-4" class="flex flex-wrap">
+      <div class="mt-6">
+        <p-button (onClick)="redirect()" class="submit" label="Voltar"></p-button>
+      </div>
+      <div class="mt-6 ml-4">
+        <p-button (onClick)="submit()" class="submit" severity="success" [disabled]="model.invalid" icon="pi pi-check"
+          label="Confirmar"></p-button>
+      </div>
     </div>
   </div>
 </div>

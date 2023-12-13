@@ -16,6 +16,7 @@ import {
   Validators,
   ReactiveFormsModule,
   FormsModule,
+  FormControl,
 } from '@angular/forms';
 import { ChangeDetectorRef, HostBinding  } from '@angular/core';
 
@@ -32,6 +33,12 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { GeneralService } from 'src/app/shared/services/general.service';
+import { finalize, take } from 'rxjs';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +53,10 @@ import {
     FormsModule,
     PasswordModule,
     DividerModule,
+    ToastModule,
+    ProgressSpinnerModule
   ],
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,12 +73,22 @@ import {
   ],
 })
 export default class LoginComponent implements OnInit {
+  loading = false
   #builder = inject(FormBuilder);
   model: FormGroup = new FormGroup({});
   #breakpointObserver: BreakpointObserver = inject(BreakpointObserver);
   tamanhoDaImagem = '500px';
   #cd = inject(ChangeDetectorRef);
+  messageService = inject(MessageService)
+  #router = inject(Router)
   idiomas: any[] | undefined;
+
+  constructor(private service: GeneralService){
+  }
+
+  get email() {
+    return this.model.get('email')?.value
+  }
 
   ngOnInit(): void {
     this.model = this.#getNewModel();
@@ -98,30 +118,47 @@ export default class LoginComponent implements OnInit {
         }
         this.#cd.markForCheck();
       });
-    this.#loadCountries();
-  }
-
-  #loadCountries() {
-    this.idiomas = [
-      { name: 'Português - Brasileiro', code: 'BR' },
-      { name: 'Português - Angolano', code: 'CN' },
-      { name: 'Francês', code: 'FR' },
-      { name: 'Germany', code: 'DE' },
-      { name: 'Japônes', code: 'JP' },
-      { name: 'Espanhol', code: 'ES' },
-      { name: 'Inglês - Estados Unidos', code: 'US' },
-    ];
   }
 
   #getNewModel() {
     return this.#builder.group({
-      email: [undefined, [Validators.required]],
+      email: [undefined, [Validators.required, this.emailValidator]],
       senha: [undefined, [Validators.required]],
-      idioma: [undefined, [Validators.required]],
     });
   }
+  emailValidator = (control: FormControl) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const isValid = emailRegex.test(control.value);
+
+    return isValid ? null : { emailInvalido: true };
+  };
 
   public submit() {
     const dto = this.model.getRawValue();
+    this.loading = true
+    this.service
+      .login(dto)
+      .pipe(take(1), finalize(() => this.loading = false))
+      .subscribe(
+        (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Login realizado com sucesso!',
+          });
+          this.#router.navigate(['home'], {queryParams: {nome: res.nome}})
+        },
+        (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao realizar login. Tente novamente.',
+          });
+        }
+      );
+  }
+
+  redirectToRegister(){
+    this.#router.navigate(['cadastro'])
   }
 }

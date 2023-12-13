@@ -31,6 +31,24 @@
   gap: 20rem;
 }
 
+
+@media only screen and (max-width: 768px) {
+  .options {
+      flex-direction: column;
+      height: auto;
+      padding: 2rem;
+      text-align: center;
+  }
+
+  .option-item {
+      margin-bottom: 1rem;
+  }
+
+  .option-item:last-child {
+      margin-bottom: 0;
+  }
+}
+
 .titles {
   padding-top: 1rem;
   color: #fff;
