@@ -147,6 +147,7 @@ export default class LoginComponent implements OnInit {
             detail: 'Login realizado com sucesso!',
           });
           this.#router.navigate(['home'], {queryParams: {nome: res.nome}})
+          this.#cd.markForCheck()
         },
         (err) => {
           this.messageService.add({

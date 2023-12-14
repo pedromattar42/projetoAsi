@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -47,6 +47,7 @@ export default class RegisterComponent implements OnInit {
   messageService = inject(MessageService)
   #service = inject(GeneralService)
   idiomas: any[] | undefined;
+  #cd = inject(ChangeDetectorRef);
 
   loading = false
 
@@ -123,6 +124,7 @@ export default class RegisterComponent implements OnInit {
               summary: 'Sucesso',
               detail: 'Usuário cadastrado com sucesso!',
             });
+            this.#cd.markForCheck()
           },
           (err) => {
             this.messageService.add({
